@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Committee Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+            background: linear-gradient(120deg, #e0e0e0, #f8f8f8);
+        }
+
+        .committee-card {
+            background-color: #f8f8f8; /* White-gray background */
+            color: #212529; /* Black text */
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, height 0.3s ease-in-out, max-height 0.3s ease-in-out;
+            cursor: pointer;
+            height: 320px; /* Fixed height */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left; /* Align text to the left */
+            border: 2px solid #212529; /* Border with #212529 color */
+            position: relative; /* For button positioning */
+        }
+
+        .committee-card:hover {
+            transform: scale(1.02);
+        }
+
+        .committee-header {
+            font-size: 24px;
+            margin-bottom: 10px;
+            margin-top: 10px; /* Move committee name slightly higher */
+            font-weight: bold; /* Bold text for committee names */
+            text-align: left; /* Align text to the left */
+        }
+
+        .committee-description {
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left; /* Align text to the left */
+        }
+
+        .details {
+            background-color: #f8f8f8; /* Dark background for details */
+            color:  #212529; /* White-gray text */
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+            text-align: left; /* Align text to the left */
+        }
+
+        .committee-card.open .details {
+            opacity: 1;
+            max-height: 150px;
+            margin-bottom: 10px; /* Decreased gap between details and button */
+        }
+
+        .committee-card.open .committee-description {
+            display: none;
+        }
+
+        .status-button {
+            display: none; /* Initially hidden */
+            margin-top: 10px;
+            padding: 8px 12px; /* Decreased padding for smaller button */
+            background-color: #212529; /* Button background color */
+            color: #f8f8f8; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            text-align: center;
+            position: absolute; /* Positioning the button */
+            bottom: 20px;
+            left: 20px; /* Align button to the left */
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .status-button:hover {
+            background-color: #333; /* Darker shade on hover */
+        }
+
+        .committee-card.open .status-button {
+            display: inline-block; /* Show button when card is clicked */
+        }
+
+        /* Ensure the button doesn't interrupt the card click */
+        .committee-card .status-button {
+            pointer-events: auto;
+        }
+
+        /* Icon styles */
+        .committee-header i {
+            margin-right: 8px;
+        }
+
+        /* Responsive adjustments for mobile screens */
+        @media (max-width: 768px) {
+            /* Maintain consistent height on mobile screens */
+            .committee-card {
+                min-height: 300px;
+                height: auto; /* Fixed height for mobile */
+                padding: 15px;
+                transition: transform 0.5s ease-in-out, height 1s ease-in-out, max-height 1s ease-in-out;
+            }
+
+            /* Make the details section more spacious on smaller screens */
+            .committee-card.open .details {
+                max-height: none; /* Allow details to expand fully */
+                margin-bottom: 20px; /* Increase gap between details and button */
+                transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+            }
+
+            /* Adjust button position and size on smaller screens */
+            .status-button {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                width: 100%;
+                margin-top: 10px;
+                padding: 10px;
+                font-size: 16px;
+                text-align: center;
+                transition: background-color 0.5s ease-in-out;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="committee-card" id="card1">
+                    <div class="committee-header"><i class="fas fa-utensils"></i>Food Committee</div>
+                    <div class="committee-description">
+                        Oversees meal planning and food safety.
+                    </div>
+                    <div class="details">
+                        <p><strong>Leader Name:</strong> John Doe</p>
+                        <p><strong>Department:</strong> Culinary</p>
+                        <p><strong>Room Number:</strong> 001</p>
+                    </div>
+                    <button class="status-button">Current Status</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="committee-card" id="card2">
+                    <div class="committee-header"><i class="fas fa-running"></i>Sports Committee</div>
+                    <div class="committee-description">
+                        Specializes in athletic training.
+                    </div>
+                    <div class="details">
+                        <p><strong>Leader Name:</strong> Jane Smith</p>
+                        <p><strong>Department:</strong> Physical Education</p>
+                        <p><strong>Room Number:</strong> 002</p>
+                    </div>
+                    <button class="status-button">Current Status</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="committee-card" id="card3">
+                    <div class="committee-header"><i class="fas fa-seedling"></i>Garden Committee</div>
+                    <div class="committee-description">
+                        Oversees plant care and landscaping.
+                    </div>
+                    <div class="details">
+                        <p><strong>Leader Name:</strong> Mark Lee</p>
+                        <p><strong>Department:</strong> Botany</p>
+                        <p><strong>Room Number:</strong> 003</p>
+                    </div>
+                    <button class="status-button">Current Status</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="committee-card" id="card4">
+                    <div class="committee-header"><i class="fas fa-wifi"></i>WiFi Committee</div>
+                    <div class="committee-description">
+                        Manages network infrastructure.
+                    </div>
+                    <div class="details">
+                        <p><strong>Leader Name:</strong> Sarah Johnson</p>
+                        <p><strong>Department:</strong> IT</p>
+                        <p><strong>Room Number:</strong> 004</p>
+                    </div>
+                    <button class="status-button">Current Status</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="committee-card" id="card5">
+                    <div class="committee-header"><i class="fas fa-book"></i>Library Committee</div>
+                    <div class="committee-description">
+                        Responsible for organizing resources.
+                    </div>
+                    <div class="details">
+                        <p><strong>Leader Name:</strong> Emily Davis</p>
+                        <p><strong>Department:</strong> Library Science</p>
+                        <p><strong>Room Number:</strong> 005</p>
+                    </div>
+                    <button class="status-button">Current Status</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="committee-card" id="card6">
+                    <div class="committee-header"><i class="fas fa-broom"></i>Cleanliness Committee</div>
+                    <div class="committee-description">
+                        Ensures cleanliness and hygiene.
+                    </div>
+                    <div class="details">
+                        <p><strong>Leader Name:</strong> Michael Brown</p>
+                        <p><strong>Department:</strong> Environmental Science</p>
+                        <p><strong>Room Number:</strong> 006</p>
+                    </div>
+                    <button class="status-button">Current Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.committee-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.committee-card').forEach(c => {
+                    if (c !== card) {
+                        c.classList.remove('open');
+                    }
+                });
+                card.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>
