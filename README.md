@@ -33,7 +33,7 @@ Installation
 Follow the steps below to set up the project locally:
 
 # Clone the repository
-git clone https://github.com/your-username/srechostel.git
+git clone https://github.com/KESHAVAPANDI/SrecHostel.git
 
 # Navigate to the project directory
 cd srechostel
